@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "durationMs": 21119.61,
+  "generatedAt": "2026-10-26T18:32:08.012Z",
+  "total": 1,
+  "passed": 1,
+  "failed": 0,
+  "skipped": 0,
+  "tests": [
+    {
+      "title": "End-to-End shopping flow @master @end-to-end @web",
+      "file": "tests\\web\\endToEndShoppingFlow.spec.ts",
+      "line": 5,
+      "project": "chromium",
+      "status": "passed",
+      "durationMs": 18455,
+      "retries": 0
+    }
+  ]
+}
