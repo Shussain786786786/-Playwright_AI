@@ -75,11 +75,11 @@ jobs:
         with:
             name: custom-report
             path: custom-report/
-          retention-days: 30
+            retention-days: 30
       - name:  Upload Allure Results
         if: always()
         uses: actions/upload-artifact@v4
-with:
-name: allure-results
-path: allure-results/
-retention-days: 30
+        with:
+            name: allure-results
+            path: allure-results/
+            retention-days: 30
