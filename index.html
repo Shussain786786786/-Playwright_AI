@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Playwright Custom Test Report</title>
+    <style>
+        body{font:15px/1.5 system-ui,sans-serif;margin:2rem;color:#202124}
+        h1{margin-bottom:.25rem}.meta{color:#5f6368;margin-top:0}
+        .summary{display:flex;gap:1rem;flex-wrap:wrap;margin:1.5rem 0}
+        .card{padding:1rem 1.5rem;border:1px solid #dadce0;border-radius:8px;min-width:100px}
+        .card strong{display:block;font-size:1.5rem}
+        table{border-collapse:collapse;width:100%}th,td{border-bottom:1px solid #dadce0;padding:.7rem;text-align:left;vertical-align:top}
+        th{background:#f8f9fa}.status{font-weight:700;text-transform:capitalize}
+        .passed{color:#137333}.failed,.timedOut{color:#c5221f}.skipped{color:#5f6368}
+        td:last-child{white-space:pre-wrap;max-width:30rem}
+    </style>
+</head>
+<body>
+    <h1>Playwright Custom Test Report</h1>
+    <p class="meta">Run status: <strong>passed</strong> · Generated 2026-10-26T18:32:08.012Z · Duration 21119.61 ms</p>
+    <section class="summary">
+        <div class="card">Total<strong>1</strong></div>
+        <div class="card">Passed<strong>1</strong></div>
+        <div class="card">Failed<strong>0</strong></div>
+        <div class="card">Skipped<strong>0</strong></div>
+    </section>
+    <table>
+        <thead><tr><th>Test</th><th>Project</th><th>Status</th><th>Duration</th><th>Location</th><th>Error</th></tr></thead>
+        <tbody>
+            <tr>
+                <td>End-to-End shopping flow @master @end-to-end @web</td>
+                <td>chromium</td>
+                <td><span class="status passed">passed</span></td>
+                <td>18455 ms</td>
+                <td>tests\web\endToEndShoppingFlow.spec.ts:5</td>
+                <td></td>
+            </tr></tbody>
+    </table>
+</body>
+</html>
