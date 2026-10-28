@@ -4,7 +4,7 @@ export class HomePage {
     private readonly page: Page;
 
     // Locators
-    private readonly btnMyAccount: Locator;
+    private readonly lnkMyAccount: Locator;
     private readonly lnkShoppingCart: Locator;
     private readonly txtSearch: Locator;
     private readonly lnkRegister: Locator;
@@ -14,7 +14,7 @@ export class HomePage {
         this.page = page;
 
         // Initialize locators with CSS selectors
-        this.btnMyAccount = page.getByRole("button", { name: "My Account", exact: true });
+        this.lnkMyAccount = page.getByRole("link", { name: "My Account", exact: true });
         this.lnkShoppingCart = page.getByRole("link", { name: "Shopping Cart", exact: true });
         this.txtSearch = page.getByRole("textbox", { name: "Search" });
         this.lnkRegister = page.getByRole("link", { name: "Register", exact: true });
@@ -25,7 +25,7 @@ export class HomePage {
      * Opens the My Account navigation menu.
      */
     async openAccountMenu(): Promise<void> {
-        await this.btnMyAccount.click();
+        await this.lnkMyAccount.click();
     }
 
     /**
