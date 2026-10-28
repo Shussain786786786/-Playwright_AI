@@ -15,7 +15,6 @@ on:
           - test:sanity
           - test:regression
           - test:e2e
-          - test:api
           - test:web
           - test:datadriven
         default: "test:e2e"
@@ -24,8 +23,6 @@ on:
         type: choice
         options:
           - chromium
-          - firefox
-          - webkit
         default: "chromium"
       mode:
         description: "Run mode"
@@ -57,9 +54,16 @@ jobs:
         run: Copy-Item utils\.env.example .env
       - name:  Run Playwright Tests
         run: |
-          if ([string]::IsNullOrWhiteSpace($env:WEB_APP_URL)) {
-            throw "Set the repository Actions variable WEB_APP_URL or provide web_app_url when manually running this workflow. The URL must be reachable by the runner."
+          $webAppUrl = $env:WEB_APP_URL
+          if ([string]::IsNullOrWhiteSpace($webAppUrl)) {
+            $webAppUrl = (Get-Content utils\.env.example |
+              Where-Object { $_ -match '^WEB_APP_URL=' } |
+              Select-Object -First 1) -replace '^WEB_APP_URL=', ''
           }
+          if ([string]::IsNullOrWhiteSpace($webAppUrl)) {
+            throw "Set the repository Actions variable WEB_APP_URL, provide web_app_url when manually running this workflow, or configure WEB_APP_URL in utils\.env.example."
+          }
+          $env:WEB_APP_URL = $webAppUrl
           $suite = "${{ github.event.inputs.test_suite || 'test:e2e' }}"
           $browser = "${{ github.event.inputs.browser || 'chromium' }}"
           $mode = "${{ github.event.inputs.mode || 'headless' }}"
