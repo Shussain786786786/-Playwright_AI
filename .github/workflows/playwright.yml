@@ -49,7 +49,7 @@ jobs:
       - name: Install Dependencies
         run: npm ci
       - name:  Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install
       - name:  Create .env File
         run: Copy-Item utils\.env.example .env
       - name:  Run Playwright Tests
@@ -69,8 +69,12 @@ jobs:
           $mode = "${{ github.event.inputs.mode || 'headless' }}"
           $tag = $suite -replace 'test:', ''
           $browserFlag = "--project=$browser"
-          $modeFlag = if ($mode -eq 'headed') { '--headed' } else { '' }
-          npx playwright test --grep "@$tag" $browserFlag $modeFlag --output=test-results
+          $env:PW_TEST_HEADLESS = if ($mode -eq 'headed') { '0' } else { '1' }
+          $playwrightArgs = @('test', '--grep', "@$tag", $browserFlag, '--output=test-results')
+          if ($mode -eq 'headed') {
+            $playwrightArgs += '--headed'
+          }
+          npx playwright @playwrightArgs
         env:
           CI: "1"
           WEB_APP_URL: ${{ github.event.inputs.web_app_url || vars.WEB_APP_URL }}

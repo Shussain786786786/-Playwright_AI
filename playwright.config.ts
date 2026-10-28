@@ -21,7 +21,7 @@ use: {
 trace: "on-first-retry",
 screenshot: "only-on-failure",
 video: "retain-on-failure",
-headless: false,
+headless: process.env.PW_TEST_HEADLESS === "1",
 viewport: { width: 1280, height: 720 }, // Set default viewport size for consistency
 ignoreHTTPSErrors: true, // Ignore SSL errors if necessary
 permissions: ["geolocation"], // Set necessary permissions for geolocation-based tests
