@@ -36,6 +36,7 @@ test("New customer is validated in the Admin Portal and MySQL @master @db @web",
         firstName: RandomDataUtil.getFirstName(),
         lastName: RandomDataUtil.getLastName(),
         email: `${generatedEmail.slice(0, emailSeparator)}+${Date.now()}${generatedEmail.slice(emailSeparator)}`,
+        telephone: RandomDataUtil.getPhoneNumber(),
         password: RandomDataUtil.getPassword(12),
     };
 
@@ -48,6 +49,7 @@ test("New customer is validated in the Admin Portal and MySQL @master @db @web",
                 customer.firstName,
                 customer.lastName,
                 customer.email,
+                customer.telephone,
                 customer.password,
             );
             expect(await accountPage.isRegistrationConfirmationVisible()).toBeTruthy();

@@ -5,9 +5,9 @@ export class Helper {
 
   static getProductDetails() {
     return {
-      productName: "MacBook",
+      productName: "Samsung SyncMaster 941BW",
       productQuantity: "1",
-      totalPrice: "$602.00",
+      totalPrice: "$242.00",
     };
   }
 

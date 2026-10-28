@@ -57,7 +57,7 @@ export class CartPage {
      * @returns Promise<string> - Displayed unit price
      */
     async getProductUnitPrice(productName: string): Promise<string> {
-        return (await this.getProductRow(productName).getByRole("cell").nth(3).innerText()).trim();
+        return (await this.getProductRow(productName).getByRole("cell").nth(4).innerText()).trim();
     }
 
     /**
@@ -66,7 +66,7 @@ export class CartPage {
      * @returns Promise<string> - Displayed product total
      */
     async getProductLineTotal(productName: string): Promise<string> {
-        return (await this.getProductRow(productName).getByRole("cell").nth(4).innerText()).trim();
+        return (await this.getProductRow(productName).getByRole("cell").nth(5).innerText()).trim();
     }
 
     /**
@@ -74,15 +74,13 @@ export class CartPage {
      * @returns Promise<string> - Cart grand total
      */
     async getGrandTotal(): Promise<string> {
-        const totalRow = this.page.getByRole("row").filter({
-            has: this.page.getByText("Total", { exact: true }),
-        }).last();
+        const totalRow = this.page.getByText("Total:", { exact: true }).locator("xpath=../..");
         return (await totalRow.getByRole("cell").last().innerText()).trim();
     }
 
     private getProductRow(productName: string): Locator {
         return this.page.getByRole("table").getByRole("row").filter({
-            has: this.page.getByRole("link", { name: productName, exact: true }),
+            has: this.page.getByRole("link", { name: productName }),
         });
     }
 }

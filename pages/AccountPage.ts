@@ -7,7 +7,6 @@ export class AccountPage {
     private readonly registrationHeading: Locator;
     private readonly dashboardHeading: Locator;
     private readonly logoutHeading: Locator;
-    private readonly lnkMyAccount: Locator;
     private readonly lnkLogout: Locator;
     private readonly lnkContinue: Locator;
 
@@ -16,10 +15,9 @@ export class AccountPage {
 
         // Initialize locators with CSS selectors
         this.registrationHeading = page.getByRole("heading", { name: "Your Account Has Been Created!", exact: true });
-        this.dashboardHeading = page.getByRole("main").getByRole("heading", { name: "My Account", exact: true });
+        this.dashboardHeading = page.locator("#content").getByRole("heading", { name: "My Account", exact: true });
         this.logoutHeading = page.getByRole("heading", { name: "Account Logout", exact: true });
-        this.lnkMyAccount = page.getByRole("link", { name: "My Account", exact: true });
-        this.lnkLogout = page.getByRole("navigation").getByRole("link", { name: "Logout", exact: true });
+        this.lnkLogout = page.locator("#column-right").getByRole("link", { name: "Logout", exact: true });
         this.lnkContinue = page.getByRole("link", { name: "Continue", exact: true });
     }
 
@@ -62,13 +60,7 @@ export class AccountPage {
      * Opens the account menu and logs the customer out.
      */
     async logout(): Promise<void> {
-        try {
-            await this.lnkMyAccount.click();
-            await this.lnkLogout.click();
-        } catch (error) {
-            console.log(`Error logging out the customer: ${error}`);
-            throw error;
-        }
+        await this.lnkLogout.click();
     }
 
     /**

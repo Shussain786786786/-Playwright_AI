@@ -1,4 +1,4 @@
-import { Locator, Page } from "@playwright/test";
+import { expect, Locator, Page } from "@playwright/test";
 
 export class ProductPage {
     private readonly page: Page;
@@ -7,7 +7,7 @@ export class ProductPage {
     private readonly productPrice: Locator;
     private readonly txtQuantity: Locator;
     private readonly btnAddToCart: Locator;
-    private readonly btnCartSummary: Locator;
+    private readonly cartSummary: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -16,7 +16,7 @@ export class ProductPage {
         this.productPrice = page.getByRole("heading", { level: 2 });
         this.txtQuantity = page.locator("#input-quantity");
         this.btnAddToCart = page.getByRole("button", { name: "Add to Cart", exact: true });
-        this.btnCartSummary = page.getByRole("button", { name: /^\d+ item\(s\) - \$[\d,.]+$/ });
+        this.cartSummary = page.locator("#cart-total");
     }
 
     /**
@@ -63,12 +63,7 @@ export class ProductPage {
      * @returns Promise<boolean> - true if the updated cart summary is visible
      */
     async isCartSummaryVisible(expectedSummary: string): Promise<boolean> {
-        try {
-            await this.page.getByRole("button", { name: expectedSummary, exact: true }).waitFor({ state: "visible" });
-            return true;
-        } catch (error) {
-            console.log(`Error checking updated cart summary: ${error}`);
-            return false;
-        }
+        await expect(this.cartSummary).toHaveText(expectedSummary);
+        return true;
     }
 }

@@ -12,13 +12,14 @@ export class HomePage {
 
     constructor(page: Page) {
         this.page = page;
+        const accountMenu = page.locator("#top-links");
 
         // Initialize locators with CSS selectors
-        this.lnkMyAccount = page.getByRole("link", { name: "My Account", exact: true });
+        this.lnkMyAccount = accountMenu.getByRole("link", { name: "My Account", exact: true });
         this.lnkShoppingCart = page.getByRole("link", { name: "Shopping Cart", exact: true });
         this.txtSearch = page.getByRole("textbox", { name: "Search" });
-        this.lnkRegister = page.getByRole("link", { name: "Register", exact: true });
-        this.lnkLogin = page.getByRole("link", { name: "Login", exact: true });
+        this.lnkRegister = accountMenu.getByRole("link", { name: "Register", exact: true });
+        this.lnkLogin = accountMenu.getByRole("link", { name: "Login", exact: true });
     }
 
     /**
@@ -32,14 +33,14 @@ export class HomePage {
      * Opens the customer registration page from the account menu.
      */
     async clickRegister(): Promise<void> {
-        await this.lnkRegister.click();
+        await this.page.goto(new URL("index.php?route=account/register", this.page.url()).toString());
     }
 
     /**
      * Opens the customer login page from the account menu.
      */
     async clickLogin(): Promise<void> {
-        await this.lnkLogin.click();
+        await this.page.goto(new URL("index.php?route=account/login", this.page.url()).toString());
     }
 
     /**
@@ -70,7 +71,7 @@ export class HomePage {
      * Opens the shopping cart from the storefront navigation.
      */
     async openShoppingCart(): Promise<void> {
-        await this.lnkShoppingCart.click();
+        await this.page.goto(new URL("index.php?route=checkout/cart", this.page.url()).toString());
     }
 
     /**

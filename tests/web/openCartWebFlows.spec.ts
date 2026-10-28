@@ -50,6 +50,7 @@ test("Customer registration @master @sanity @web", async ({
             RandomDataUtil.getFirstName(),
             RandomDataUtil.getLastName(),
             email,
+            RandomDataUtil.getPhoneNumber(),
             password,
         );
     });

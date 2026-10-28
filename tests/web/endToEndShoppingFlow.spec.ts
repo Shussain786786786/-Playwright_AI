@@ -19,6 +19,7 @@ test("End-to-End shopping flow @master @e2e @end-to-end @web", async ({
         firstName: RandomDataUtil.getFirstName(),
         lastName: RandomDataUtil.getLastName(),
         email: `${generatedEmail.slice(0, emailSeparator)}+${Date.now()}${generatedEmail.slice(emailSeparator)}`,
+        telephone: RandomDataUtil.getPhoneNumber(),
         password: RandomDataUtil.getPassword(12),
     };
     const pageErrors: string[] = [];
@@ -30,13 +31,13 @@ test("End-to-End shopping flow @master @e2e @end-to-end @web", async ({
     });
 
     await test.step("2) Register a new customer with unique data", async () => {
-        await homePage.openAccountMenu();
         await homePage.clickRegister();
         expect(await registrationPage.isRegistrationPageVisible()).toBeTruthy();
         await registrationPage.register(
             customer.firstName,
             customer.lastName,
             customer.email,
+            customer.telephone,
             customer.password,
         );
     });
@@ -55,8 +56,6 @@ test("End-to-End shopping flow @master @e2e @end-to-end @web", async ({
     });
 
     await test.step("5) Log in with the newly created credentials", async () => {
-        await homePage.openAccountMenu();
-        expect(await homePage.areGuestAccountOptionsVisible()).toBeTruthy();
         await homePage.clickLogin();
         expect(await loginPage.isLoginPageVisible()).toBeTruthy();
         await loginPage.login(customer.email, customer.password);
