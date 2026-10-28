@@ -57,7 +57,7 @@ jobs:
         run: Copy-Item utils\.env.example .env
       - name:  Run Playwright Tests
         run: |
-          if ([string]::IsNullOrWhiteSpace($env:https://tutorialsninja.com/demo/)) {
+          if ([string]::IsNullOrWhiteSpace($env:WEB_APP_URL)) {
             throw "Set the repository Actions variable WEB_APP_URL or provide web_app_url when manually running this workflow. The URL must be reachable by the runner."
           }
           $suite = "${{ github.event.inputs.test_suite || 'test:e2e' }}"
