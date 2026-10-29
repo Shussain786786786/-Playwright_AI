@@ -1,4 +1,4 @@
-// Jenkinsfile.windows
+// Jenkinsfile
 // Declarative Jenkins pipeline for Windows build agents
 
 
@@ -55,7 +55,7 @@ pipeline {
     stage('🤖 Install Playwright Browsers & Dependencies') {
       steps {
         powershell 'npx playwright install --with-deps'
-        powershell 'Copy-Item .env.example .env -ErrorAction SilentlyContinue'
+        powershell 'Copy-Item utils\\.env.example .env -ErrorAction SilentlyContinue'
       }
     }
     
